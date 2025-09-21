@@ -1,0 +1,102 @@
+{
+  "name": "lab03-microservices-nosql",
+  "version": "1.0.0",
+  "description": "Sistema de Lista de Compras com Microsserviços e NoSQL - PUC Minas",
+  "main": "client-demo.js",
+  "scripts": {
+    "start": "concurrently \"npm run start:user\" \"npm run start:item\" \"npm run start:list\" \"npm run start:gateway\"",
+    "start:user": "cd services/user-service && npm start",
+    "start:item": "cd services/item-service && npm start",
+    "start:list": "cd services/list-service && npm start",
+    "start:gateway": "cd api-gateway && npm start",
+    "dev": "concurrently \"npm run dev:user\" \"npm run dev:item\" \"npm run dev:list\" \"npm run dev:gateway\"",
+    "dev:user": "cd services/user-service && npm run dev",
+    "dev:item": "cd services/item-service && npm run dev",
+    "dev:list": "cd services/list-service && npm run dev",
+    "dev:gateway": "cd api-gateway && npm run dev",
+    "demo": "node client-demo.js",
+    "demo:health": "node client-demo.js --health",
+    "demo:items": "node client-demo.js --items",
+    "demo:search": "node client-demo.js --search=arroz",
+    "health": "curl -s http://localhost:3000/health | jq || curl -s http://localhost:3000/health",
+    "health:user": "curl -s http://localhost:3001/health",
+    "health:item": "curl -s http://localhost:3003/health",
+    "health:list": "curl -s http://localhost:3004/health",
+    "health:gateway": "curl -s http://localhost:3000/health",
+    "install:all": "npm install && cd services/user-service && npm install && cd ../item-service && npm install && cd ../list-service && npm install && cd ../../api-gateway && npm install",
+    "clean": "rm -rf node_modules services/*/node_modules api-gateway/node_modules services/*/database api-gateway/logs",
+    "clean:db": "rm -rf services/*/database",
+    "stop": "pkill -f \"node.*service\" || true",
+    "restart": "npm run stop && sleep 2 && npm run start",
+    "logs": "tail -f services/*/logs/*.log api-gateway/logs/*.log 2>/dev/null || echo 'Nenhum log encontrado'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "microservices",
+    "nosql",
+    "api-gateway",
+    "service-discovery",
+    "circuit-breaker",
+    "shopping-list",
+    "item-catalog",
+    "user-management",
+    "sistemas-distribuidos",
+    "puc-minas"
+  ],
+  "author": "Aluno PUC Minas",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aluno-pucminas/lab03-microservices-nosql.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aluno-pucminas/lab03-microservices-nosql/issues"
+  },
+  "homepage": "https://github.com/aluno-pucminas/lab03-microservices-nosql#readme",
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "fs-extra": "^11.1.0",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  },
+  "config": {
+    "ports": {
+      "gateway": 3000,
+      "user-service": 3001,
+      "item-service": 3003,
+      "list-service": 3004
+    }
+  },
+  "microservices": {
+    "architecture": "Database per Service",
+    "database": "JSON-NoSQL",
+    "services": [
+      {
+        "name": "user-service",
+        "port": 3001,
+        "description": "Gerenciamento de usuários e autenticação"
+      },
+      {
+        "name": "item-service", 
+        "port": 3003,
+        "description": "Catálogo de itens/produtos"
+      },
+      {
+        "name": "list-service",
+        "port": 3004,
+        "description": "Listas de compras e gerenciamento de itens"
+      },
+      {
+        "name": "api-gateway",
+        "port": 3000,
+        "description": "Gateway principal e agregação de serviços"
+      }
+    ]
+  }
+}

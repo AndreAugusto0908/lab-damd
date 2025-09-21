@@ -1,0 +1,74 @@
+[
+  {
+    "id": "db195d24-b3e5-410b-9896-37e6cb148098",
+    "userId": "sample-user-1",
+    "name": "Lista de Compras - Casa",
+    "description": "Itens essenciais para casa",
+    "status": "active",
+    "items": [
+      {
+        "itemId": "sample-item-1",
+        "itemName": "Arroz Branco Tipo 1",
+        "quantity": 2,
+        "unit": "kg",
+        "estimatedPrice": 15,
+        "purchased": false,
+        "notes": "Comprar o tipo 1",
+        "addedAt": "2025-09-21T22:13:16.498Z"
+      },
+      {
+        "itemId": "sample-item-2",
+        "itemName": "Feijão Carioca",
+        "quantity": 1,
+        "unit": "kg",
+        "estimatedPrice": 8.9,
+        "purchased": true,
+        "notes": "",
+        "addedAt": "2025-09-21T22:13:16.499Z"
+      }
+    ],
+    "summary": {
+      "totalItems": 2,
+      "purchasedItems": 1,
+      "estimatedTotal": 23.9
+    },
+    "createdAt": "2025-09-21T22:13:16.499Z",
+    "updatedAt": "2025-09-21T22:13:16.530Z"
+  },
+  {
+    "id": "f976f52b-f0fb-4f35-8ac6-6bbbc9e1095e",
+    "userId": "4ae6c018-ab16-40a6-a5d7-caae3c288c37",
+    "name": "Lista de Compras Demo",
+    "description": "Lista criada durante a demonstração do sistema",
+    "status": "active",
+    "items": [
+      {
+        "itemId": "aa920f3c-aeaa-45c5-ba03-e6fc8f2c1510",
+        "itemName": "Arroz Branco Tipo 1",
+        "quantity": 2,
+        "unit": "kg",
+        "estimatedPrice": 15,
+        "purchased": false,
+        "notes": "Item adicionado via demo",
+        "addedAt": "2025-09-21T22:16:25.972Z"
+      },
+      {
+        "itemId": "8b52ce63-21e5-4c5e-ab44-f38468928b35",
+        "itemName": "Açúcar Cristal",
+        "quantity": 1,
+        "unit": "kg",
+        "estimatedPrice": 4.2,
+        "purchased": false,
+        "notes": "Segundo item da demo",
+        "addedAt": "2025-09-21T22:16:26.506Z"
+      }
+    ],
+    "summary": {
+      "totalItems": 2,
+      "purchasedItems": 0,
+      "estimatedTotal": 19.2
+    },
+    "createdAt": "2025-09-21T22:16:24.891Z",
+    "updatedAt": "2025-09-21T22:16:26.507Z"
+  }
+]

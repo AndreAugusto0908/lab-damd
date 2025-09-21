@@ -1,0 +1,39 @@
+[
+  {
+    "id": "309f355a-e8c7-421d-b41a-63e66ba9ba4c",
+    "email": "admin@microservices.com",
+    "username": "admin",
+    "password": "$2a$12$MlBxZMTWbHUFlkcX2yeeUuKsm5QewldDwGcUjiAlcsMqNz3qEoZJG",
+    "firstName": "Administrador",
+    "lastName": "Sistema",
+    "role": "admin",
+    "status": "active",
+    "createdAt": "2025-09-21T22:13:12.301Z",
+    "updatedAt": "2025-09-21T22:13:12.302Z"
+  },
+  {
+    "id": "4ae6c018-ab16-40a6-a5d7-caae3c288c37",
+    "email": "demo1758492979961@shoplist.com",
+    "username": "demo1758492979961",
+    "password": "$2a$12$ScDV8LFy6wKChD94jGBxWen6N3zvfrshJLgj2/KYLlxRXGMNqYLk2",
+    "firstName": "Demo",
+    "lastName": "User",
+    "role": "user",
+    "status": "active",
+    "profile": {
+      "bio": null,
+      "avatar": null,
+      "preferences": {
+        "theme": "light",
+        "language": "pt-BR"
+      }
+    },
+    "metadata": {
+      "registrationDate": "2025-09-21T22:16:20.727Z",
+      "lastLogin": null,
+      "loginCount": 0
+    },
+    "createdAt": "2025-09-21T22:16:20.728Z",
+    "updatedAt": "2025-09-21T22:16:20.728Z"
+  }
+]
