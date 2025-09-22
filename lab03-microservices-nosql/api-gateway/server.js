@@ -290,10 +290,9 @@ class APIGateway {
                 break;
                 
             case 'item-service':
-                // /api/items -> /items
-                // /api/items/123 -> /items/123
-                // /api/items/search -> /search
-                if (originalPath.includes('/search')) {
+                if (originalPath.startsWith('/api/items/categories')) {
+                    targetPath = '/categories';
+                } else if (originalPath.includes('/search')) {
                     targetPath = '/search';
                 } else {
                     targetPath = originalPath.replace('/api/items', '/items');

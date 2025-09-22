@@ -275,18 +275,19 @@ class UserService {
                 });
             }
 
-            const user = await this.usersDb.findOne({
-                $or: [
-                    { email: identifier.toLowerCase() },
-                    { username: identifier.toLowerCase() }
-                ]
-            });
+            const idLower = identifier.toLowerCase();
+
+            let user = await this.usersDb.findOne({ email: idLower });
+
+            if (!user) {
+            user = await this.usersDb.findOne({ username: idLower });
+            }
 
             if (!user || !await bcrypt.compare(password, user.password)) {
-                return res.status(401).json({
-                    success: false,
-                    message: 'Credenciais inválidas'
-                });
+            return res.status(401).json({
+                success: false,
+                message: 'Credenciais inválidas'
+            });
             }
 
             // Verificar se usuário está ativo

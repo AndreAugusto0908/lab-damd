@@ -1,6 +1,6 @@
 [
   {
-    "id": "db195d24-b3e5-410b-9896-37e6cb148098",
+    "id": "b37897c8-a544-46c2-9fe9-48ebebac3cb2",
     "userId": "sample-user-1",
     "name": "Lista de Compras - Casa",
     "description": "Itens essenciais para casa",
@@ -14,7 +14,7 @@
         "estimatedPrice": 15,
         "purchased": false,
         "notes": "Comprar o tipo 1",
-        "addedAt": "2025-09-21T22:13:16.498Z"
+        "addedAt": "2025-09-22T02:08:03.718Z"
       },
       {
         "itemId": "sample-item-2",
@@ -24,7 +24,7 @@
         "estimatedPrice": 8.9,
         "purchased": true,
         "notes": "",
-        "addedAt": "2025-09-21T22:13:16.499Z"
+        "addedAt": "2025-09-22T02:08:03.720Z"
       }
     ],
     "summary": {
@@ -32,35 +32,61 @@
       "purchasedItems": 1,
       "estimatedTotal": 23.9
     },
-    "createdAt": "2025-09-21T22:13:16.499Z",
-    "updatedAt": "2025-09-21T22:13:16.530Z"
+    "createdAt": "2025-09-22T02:08:03.720Z",
+    "updatedAt": "2025-09-22T02:08:03.720Z"
   },
   {
-    "id": "f976f52b-f0fb-4f35-8ac6-6bbbc9e1095e",
-    "userId": "4ae6c018-ab16-40a6-a5d7-caae3c288c37",
+    "id": "8ae44108-f38e-44ea-bbf0-da9edf418702",
+    "userId": "sample-user-1",
+    "name": "Lista de Limpeza",
+    "description": "Produtos de limpeza para o mês",
+    "status": "active",
+    "items": [
+      {
+        "itemId": "sample-item-3",
+        "itemName": "Detergente Líquido",
+        "quantity": 3,
+        "unit": "un",
+        "estimatedPrice": 8.97,
+        "purchased": false,
+        "notes": "Preferir o neutro",
+        "addedAt": "2025-09-22T02:08:03.720Z"
+      }
+    ],
+    "summary": {
+      "totalItems": 1,
+      "purchasedItems": 0,
+      "estimatedTotal": 8.97
+    },
+    "createdAt": "2025-09-22T02:08:03.720Z",
+    "updatedAt": "2025-09-22T02:08:03.725Z"
+  },
+  {
+    "id": "1938f6f3-cb7b-48f6-b83b-5680bf60430f",
+    "userId": "ee64a786-d91f-4fb8-a81d-3be42d32c1af",
     "name": "Lista de Compras Demo",
     "description": "Lista criada durante a demonstração do sistema",
     "status": "active",
     "items": [
       {
-        "itemId": "aa920f3c-aeaa-45c5-ba03-e6fc8f2c1510",
+        "itemId": "9bbe592f-c211-4a3c-83ec-a5f8f21699c9",
         "itemName": "Arroz Branco Tipo 1",
         "quantity": 2,
         "unit": "kg",
         "estimatedPrice": 15,
         "purchased": false,
         "notes": "Item adicionado via demo",
-        "addedAt": "2025-09-21T22:16:25.972Z"
+        "addedAt": "2025-09-22T02:09:02.080Z"
       },
       {
-        "itemId": "8b52ce63-21e5-4c5e-ab44-f38468928b35",
+        "itemId": "baf81deb-0211-4f02-a45f-1eb37172eabc",
         "itemName": "Açúcar Cristal",
         "quantity": 1,
         "unit": "kg",
         "estimatedPrice": 4.2,
         "purchased": false,
         "notes": "Segundo item da demo",
-        "addedAt": "2025-09-21T22:16:26.506Z"
+        "addedAt": "2025-09-22T02:09:02.623Z"
       }
     ],
     "summary": {
@@ -68,7 +94,33 @@
       "purchasedItems": 0,
       "estimatedTotal": 19.2
     },
-    "createdAt": "2025-09-21T22:16:24.891Z",
-    "updatedAt": "2025-09-21T22:16:26.507Z"
+    "createdAt": "2025-09-22T02:09:00.979Z",
+    "updatedAt": "2025-09-22T02:09:02.624Z"
+  },
+  {
+    "id": "a3ae0851-7c7d-4f60-aa7c-14885cebe008",
+    "userId": "1bfbf44e-51f1-478b-836d-b2c85147217e",
+    "name": "Compras da Semana",
+    "description": "Itens para o mercado",
+    "status": "active",
+    "items": [
+      {
+        "itemId": "9bbe592f-c211-4a3c-83ec-a5f8f21699c9",
+        "itemName": "Arroz Branco Tipo 1",
+        "quantity": 2,
+        "unit": "kg",
+        "estimatedPrice": 15,
+        "purchased": false,
+        "notes": "Pegar orgânico",
+        "addedAt": "2025-09-22T02:11:09.373Z"
+      }
+    ],
+    "summary": {
+      "totalItems": 1,
+      "purchasedItems": 0,
+      "estimatedTotal": 15
+    },
+    "createdAt": "2025-09-22T02:10:09.881Z",
+    "updatedAt": "2025-09-22T02:11:09.379Z"
   }
 ]

@@ -1,6 +1,6 @@
 [
   {
-    "id": "aa920f3c-aeaa-45c5-ba03-e6fc8f2c1510",
+    "id": "9bbe592f-c211-4a3c-83ec-a5f8f21699c9",
     "name": "Arroz Branco Tipo 1",
     "category": "Alimentos",
     "brand": "Tio João",
@@ -9,11 +9,11 @@
     "barcode": "7891000100001",
     "description": "Arroz branco tipo 1, grãos longos, pacote de 1kg",
     "active": true,
-    "createdAt": "2025-09-21T22:13:11.232Z",
-    "updatedAt": "2025-09-21T22:13:11.235Z"
+    "createdAt": "2025-09-22T02:08:03.733Z",
+    "updatedAt": "2025-09-22T02:08:03.735Z"
   },
   {
-    "id": "66d3443d-9250-447c-88fb-02d196686cc7",
+    "id": "99c53b46-a9d3-434b-be01-fb8c8b656721",
     "name": "Feijão Carioca",
     "category": "Alimentos",
     "brand": "Kicaldo",
@@ -22,11 +22,11 @@
     "barcode": "7891000100002",
     "description": "Feijão carioca tipo 1, pacote de 1kg",
     "active": true,
-    "createdAt": "2025-09-21T22:13:11.233Z",
-    "updatedAt": "2025-09-21T22:13:11.265Z"
+    "createdAt": "2025-09-22T02:08:03.734Z",
+    "updatedAt": "2025-09-22T02:08:03.739Z"
   },
   {
-    "id": "59a9db06-bc57-4ffc-99c2-b38b6f62bb99",
+    "id": "c3a192b2-c5ff-41b8-b69e-e3bea0e33c6b",
     "name": "Óleo de Soja",
     "category": "Alimentos",
     "brand": "Liza",
@@ -35,11 +35,11 @@
     "barcode": "7891000100003",
     "description": "Óleo de soja refinado, garrafa de 900ml",
     "active": true,
-    "createdAt": "2025-09-21T22:13:11.233Z",
-    "updatedAt": "2025-09-21T22:13:11.270Z"
+    "createdAt": "2025-09-22T02:08:03.734Z",
+    "updatedAt": "2025-09-22T02:08:03.741Z"
   },
   {
-    "id": "8b52ce63-21e5-4c5e-ab44-f38468928b35",
+    "id": "baf81deb-0211-4f02-a45f-1eb37172eabc",
     "name": "Açúcar Cristal",
     "category": "Alimentos",
     "brand": "União",
@@ -48,11 +48,11 @@
     "barcode": "7891000100004",
     "description": "Açúcar cristal especial, pacote de 1kg",
     "active": true,
-    "createdAt": "2025-09-21T22:13:11.233Z",
-    "updatedAt": "2025-09-21T22:13:11.276Z"
+    "createdAt": "2025-09-22T02:08:03.734Z",
+    "updatedAt": "2025-09-22T02:08:03.746Z"
   },
   {
-    "id": "118740d9-b806-497f-b440-5f33304ed0c0",
+    "id": "97f5c27d-ddfa-473d-8e23-847eca28b3f6",
     "name": "Sal Refinado",
     "category": "Alimentos",
     "brand": "Cisne",
@@ -61,11 +61,11 @@
     "barcode": "7891000100005",
     "description": "Sal refinado iodado, pacote de 1kg",
     "active": true,
-    "createdAt": "2025-09-21T22:13:11.233Z",
-    "updatedAt": "2025-09-21T22:13:11.281Z"
+    "createdAt": "2025-09-22T02:08:03.734Z",
+    "updatedAt": "2025-09-22T02:08:03.759Z"
   },
   {
-    "id": "e38601aa-62f5-4c76-8727-74a63540b393",
+    "id": "7c8a2269-8de2-40bb-bbcc-54c42d3e477f",
     "name": "Detergente Líquido",
     "category": "Limpeza",
     "brand": "Ypê",
@@ -74,11 +74,11 @@
     "barcode": "7891000200001",
     "description": "Detergente líquido neutro, frasco de 500ml",
     "active": true,
-    "createdAt": "2025-09-21T22:13:11.233Z",
-    "updatedAt": "2025-09-21T22:13:11.288Z"
+    "createdAt": "2025-09-22T02:08:03.734Z",
+    "updatedAt": "2025-09-22T02:08:03.768Z"
   },
   {
-    "id": "518a1b0d-72c1-4745-8bb5-49ea4b2e573b",
+    "id": "90a24c0a-c905-4006-b73d-822d94edaaa0",
     "name": "Água Sanitária",
     "category": "Limpeza",
     "brand": "Q-Boa",
@@ -87,11 +87,11 @@
     "barcode": "7891000200002",
     "description": "Água sanitária 2% cloro ativo, garrafa de 1 litro",
     "active": true,
-    "createdAt": "2025-09-21T22:13:11.233Z",
-    "updatedAt": "2025-09-21T22:13:11.293Z"
+    "createdAt": "2025-09-22T02:08:03.734Z",
+    "updatedAt": "2025-09-22T02:08:03.774Z"
   },
   {
-    "id": "52102c0c-c520-4922-b845-524213550c04",
+    "id": "892bdaf5-61a0-4a87-9c64-88617ebb6059",
     "name": "Sabão em Pó",
     "category": "Limpeza",
     "brand": "OMO",
@@ -100,11 +100,11 @@
     "barcode": "7891000200003",
     "description": "Sabão em pó concentrado, caixa de 1kg",
     "active": true,
-    "createdAt": "2025-09-21T22:13:11.233Z",
-    "updatedAt": "2025-09-21T22:13:11.297Z"
+    "createdAt": "2025-09-22T02:08:03.734Z",
+    "updatedAt": "2025-09-22T02:08:03.782Z"
   },
   {
-    "id": "43c93fe5-c953-4334-95d9-7bc772e2d9f8",
+    "id": "ec493d0c-0df3-4af4-8dcb-d80326958ae8",
     "name": "Desinfetante Pinho",
     "category": "Limpeza",
     "brand": "Pinho Sol",
@@ -113,11 +113,11 @@
     "barcode": "7891000200004",
     "description": "Desinfetante concentrado pinho, frasco de 1 litro",
     "active": true,
-    "createdAt": "2025-09-21T22:13:11.233Z",
-    "updatedAt": "2025-09-21T22:13:11.300Z"
+    "createdAt": "2025-09-22T02:08:03.734Z",
+    "updatedAt": "2025-09-22T02:08:03.787Z"
   },
   {
-    "id": "e1b27012-0468-4076-86f3-47e9987f6271",
+    "id": "1008142c-1998-4a04-8dab-90dfd7a436ce",
     "name": "Esponja de Limpeza",
     "category": "Limpeza",
     "brand": "Scotch-Brite",
@@ -126,11 +126,154 @@
     "barcode": "7891000200005",
     "description": "Esponja dupla face para limpeza geral",
     "active": true,
-    "createdAt": "2025-09-21T22:13:11.233Z",
-    "updatedAt": "2025-09-21T22:13:11.611Z"
+    "createdAt": "2025-09-22T02:08:03.734Z",
+    "updatedAt": "2025-09-22T02:08:03.791Z"
   },
   {
-    "id": "e9eb18ab-88ad-4c08-83a7-7ba487ea8676",
+    "id": "5eaa3827-80e0-4c3e-bc9f-93618a2463dc",
+    "name": "Pasta de Dente",
+    "category": "Higiene",
+    "brand": "Colgate",
+    "unit": "un",
+    "averagePrice": 3.99,
+    "barcode": "7891000300001",
+    "description": "Pasta de dente total 12, tubo de 90g",
+    "active": true,
+    "createdAt": "2025-09-22T02:08:03.734Z",
+    "updatedAt": "2025-09-22T02:08:03.804Z"
+  },
+  {
+    "id": "865f9647-34f6-49a0-ab2a-4379fbf9e3f8",
+    "name": "Sabonete",
+    "category": "Higiene",
+    "brand": "Dove",
+    "unit": "un",
+    "averagePrice": 2.5,
+    "barcode": "7891000300002",
+    "description": "Sabonete hidratante, barra de 90g",
+    "active": true,
+    "createdAt": "2025-09-22T02:08:03.734Z",
+    "updatedAt": "2025-09-22T02:08:03.817Z"
+  },
+  {
+    "id": "b5206f7e-afe4-418b-bf8b-b3ea10a2869d",
+    "name": "Shampoo",
+    "category": "Higiene",
+    "brand": "Pantene",
+    "unit": "un",
+    "averagePrice": 8.9,
+    "barcode": "7891000300003",
+    "description": "Shampoo hidratação intensa, frasco de 400ml",
+    "active": true,
+    "createdAt": "2025-09-22T02:08:03.734Z",
+    "updatedAt": "2025-09-22T02:08:03.825Z"
+  },
+  {
+    "id": "c9a84ef2-884a-4f21-b734-73e730dff16a",
+    "name": "Papel Higiênico",
+    "category": "Higiene",
+    "brand": "Personal",
+    "unit": "un",
+    "averagePrice": 12.5,
+    "barcode": "7891000300004",
+    "description": "Papel higiênico folha dupla, pacote com 12 rolos",
+    "active": true,
+    "createdAt": "2025-09-22T02:08:03.734Z",
+    "updatedAt": "2025-09-22T02:08:03.832Z"
+  },
+  {
+    "id": "a5582eef-945a-4589-b999-3741db592ec3",
+    "name": "Desodorante",
+    "category": "Higiene",
+    "brand": "Rexona",
+    "unit": "un",
+    "averagePrice": 6.99,
+    "barcode": "7891000300005",
+    "description": "Desodorante aerosol masculino, frasco de 150ml",
+    "active": true,
+    "createdAt": "2025-09-22T02:08:03.734Z",
+    "updatedAt": "2025-09-22T02:08:03.872Z"
+  },
+  {
+    "id": "927c3bdb-f689-4374-94ae-289fb505259b",
+    "name": "Refrigerante Cola",
+    "category": "Bebidas",
+    "brand": "Coca-Cola",
+    "unit": "litro",
+    "averagePrice": 4.5,
+    "barcode": "7891000400001",
+    "description": "Refrigerante de cola, garrafa PET 2 litros",
+    "active": true,
+    "createdAt": "2025-09-22T02:08:03.734Z",
+    "updatedAt": "2025-09-22T02:08:03.880Z"
+  },
+  {
+    "id": "b4116101-6dbb-4af9-b0ed-e4813385bcf6",
+    "name": "Suco de Laranja",
+    "category": "Bebidas",
+    "brand": "Del Valle",
+    "unit": "litro",
+    "averagePrice": 3.99,
+    "barcode": "7891000400002",
+    "description": "Suco de laranja integral, caixa de 1 litro",
+    "active": true,
+    "createdAt": "2025-09-22T02:08:03.734Z",
+    "updatedAt": "2025-09-22T02:08:03.892Z"
+  },
+  {
+    "id": "44b3fde4-625a-49a4-b169-1bf1c4691d43",
+    "name": "Água Mineral",
+    "category": "Bebidas",
+    "brand": "Crystal",
+    "unit": "litro",
+    "averagePrice": 1.5,
+    "barcode": "7891000400003",
+    "description": "Água mineral natural, garrafa de 1,5 litros",
+    "active": true,
+    "createdAt": "2025-09-22T02:08:03.734Z",
+    "updatedAt": "2025-09-22T02:08:03.900Z"
+  },
+  {
+    "id": "ece8b5ad-c831-4ab5-8664-eff5e9748d1d",
+    "name": "Café em Pó",
+    "category": "Bebidas",
+    "brand": "3 Corações",
+    "unit": "kg",
+    "averagePrice": 15.9,
+    "barcode": "7891000400004",
+    "description": "Café torrado e moído tradicional, pacote de 500g",
+    "active": true,
+    "createdAt": "2025-09-22T02:08:03.734Z",
+    "updatedAt": "2025-09-22T02:08:03.909Z"
+  },
+  {
+    "id": "ce1d5926-ea3b-4163-b5a3-868f29eb7998",
+    "name": "Pão Francês",
+    "category": "Padaria",
+    "brand": "Padaria Local",
+    "unit": "kg",
+    "averagePrice": 8,
+    "barcode": "7891000500001",
+    "description": "Pão francês fresco, vendido por quilograma",
+    "active": true,
+    "createdAt": "2025-09-22T02:08:03.734Z",
+    "updatedAt": "2025-09-22T02:08:03.916Z"
+  },
+  {
+    "id": "ef369b32-4163-4a53-a520-bd4a48980fc3",
+    "name": "Pão de Açúcar",
+    "category": "Padaria",
+    "brand": "Wickbold",
+    "unit": "un",
+    "averagePrice": 4.5,
+    "barcode": "7891000500002",
+    "description": "Pão de açúcar fatiado, pacote de 500g",
+    "active": true,
+    "createdAt": "2025-09-22T02:08:03.734Z",
+    "updatedAt": "2025-09-22T02:08:03.932Z"
+  },
+  {
+    "id": "203f1308-078c-4466-b9b0-216bf6457727",
     "name": "Item Demo NoSQL",
     "category": "Demo",
     "brand": "Demo Brand",
@@ -139,8 +282,8 @@
     "barcode": "1234567890123",
     "description": "Item criado via demonstração com banco NoSQL",
     "active": true,
-    "createdAt": "2025-09-21T22:16:30.144Z",
-    "createdBy": "4ae6c018-ab16-40a6-a5d7-caae3c288c37",
-    "updatedAt": "2025-09-21T22:16:30.145Z"
+    "createdAt": "2025-09-22T02:09:06.389Z",
+    "createdBy": "ee64a786-d91f-4fb8-a81d-3be42d32c1af",
+    "updatedAt": "2025-09-22T02:09:06.391Z"
   }
 ]
