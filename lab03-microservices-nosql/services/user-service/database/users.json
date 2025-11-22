@@ -62,5 +62,57 @@
     "updatedAt": "2025-09-22T02:09:50.089Z",
     "metadata.lastLogin": "2025-09-22T02:09:50.086Z",
     "metadata.loginCount": 1
+  },
+  {
+    "id": "853225f3-81bc-471e-8952-63b57de830e4",
+    "email": "novo.usuario@exemplo.com",
+    "username": "novousuario123",
+    "password": "$2a$12$TaMHJoW5bYVDoHyH7YAte.lFgHFGWqAXyj/P/Lw8o.yC12svc.CPi",
+    "firstName": "Primeiro Nome",
+    "lastName": "Sobrenome",
+    "role": "user",
+    "status": "active",
+    "profile": {
+      "bio": null,
+      "avatar": null,
+      "preferences": {
+        "theme": "light",
+        "language": "pt-BR"
+      }
+    },
+    "metadata": {
+      "registrationDate": "2025-11-22T18:49:50.641Z",
+      "lastLogin": null,
+      "loginCount": 0
+    },
+    "createdAt": "2025-11-22T18:49:50.642Z",
+    "updatedAt": "2025-11-22T18:49:50.642Z"
+  },
+  {
+    "id": "4f5249a7-5442-4852-b7e0-0cacc0f1b1dc",
+    "email": "user1@microservices.com",
+    "username": "user1",
+    "password": "$2a$12$FbY4W1Q8mQXfrtg7Hz7CvuZsxQawz4AAgRMVdJeo3TAng7NZRMMAa",
+    "firstName": "User",
+    "lastName": "One",
+    "role": "user",
+    "status": "active",
+    "profile": {
+      "bio": null,
+      "avatar": null,
+      "preferences": {
+        "theme": "light",
+        "language": "pt-BR"
+      }
+    },
+    "metadata": {
+      "registrationDate": "2025-11-22T18:55:11.970Z",
+      "lastLogin": null,
+      "loginCount": 0
+    },
+    "createdAt": "2025-11-22T18:55:11.991Z",
+    "updatedAt": "2025-11-22T19:14:55.404Z",
+    "metadata.lastLogin": "2025-11-22T19:14:55.401Z",
+    "metadata.loginCount": 1
   }
 ]

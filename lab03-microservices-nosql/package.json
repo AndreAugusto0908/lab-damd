@@ -58,6 +58,7 @@
     "npm": ">=8.0.0"
   },
   "dependencies": {
+    "amqplib": "^0.10.9",
     "axios": "^1.6.0",
     "fs-extra": "^11.1.0",
     "uuid": "^9.0.0"
@@ -83,7 +84,7 @@
         "description": "Gerenciamento de usuários e autenticação"
       },
       {
-        "name": "item-service", 
+        "name": "item-service",
         "port": 3003,
         "description": "Catálogo de itens/produtos"
       },

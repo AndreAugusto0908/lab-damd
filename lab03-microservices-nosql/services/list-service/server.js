@@ -7,9 +7,10 @@ const path = require('path');
 const jwt = require('jsonwebtoken');
 const axios = require('axios');
 
-// Importar banco NoSQL e service registry
+// Importar banco NoSQL, service registry e RabbitMQ Publisher
 const JsonDatabase = require('../../shared/JsonDatabase');
 const serviceRegistry = require('../../shared/serviceRegistry');
+const RabbitMQPublisher = require('../rabbitmqPublisher');
 
 class ListService {
     constructor() {
@@ -19,11 +20,23 @@ class ListService {
         this.serviceUrl = `http://localhost:${this.port}`;
         this.itemServiceUrl = process.env.ITEM_SERVICE_URL || 'http://localhost:3003';
         
+        // Inicializar RabbitMQ Publisher
+        this.rabbitPublisher = new RabbitMQPublisher();
+        
         this.setupDatabase();
         this.setupMiddleware();
         this.setupRoutes();
         this.setupErrorHandling();
         this.seedInitialData();
+        this.connectRabbitMQ();
+    }
+
+    async connectRabbitMQ() {
+        try {
+            await this.rabbitPublisher.connect();
+        } catch (error) {
+            console.error('Erro ao conectar RabbitMQ Publisher:', error);
+        }
     }
 
     setupDatabase() {
@@ -33,7 +46,6 @@ class ListService {
     }
 
     async seedInitialData() {
-        // Aguardar inicialização e criar listas de exemplo se não existirem
         setTimeout(async () => {
             try {
                 const existingLists = await this.listsDb.find();
@@ -104,7 +116,6 @@ class ListService {
                         }
                     ];
 
-                    // Inserir listas de exemplo
                     for (const list of sampleLists) {
                         await this.listsDb.create(list);
                     }
@@ -124,7 +135,6 @@ class ListService {
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: true }));
 
-        // Service info headers
         this.app.use((req, res, next) => {
             res.setHeader('X-Service', this.serviceName);
             res.setHeader('X-Service-Version', '1.0.0');
@@ -152,7 +162,8 @@ class ListService {
                         activeLists: activeLists
                     },
                     externalServices: {
-                        itemService: this.itemServiceUrl
+                        itemService: this.itemServiceUrl,
+                        rabbitMQ: this.rabbitPublisher.channel ? 'connected' : 'disconnected'
                     }
                 });
             } catch (error) {
@@ -180,7 +191,8 @@ class ListService {
                     'POST /lists/:id/items',
                     'PUT /lists/:id/items/:itemId',
                     'DELETE /lists/:id/items/:itemId',
-                    'GET /lists/:id/summary'
+                    'GET /lists/:id/summary',
+                    'POST /lists/:id/checkout'
                 ]
             });
         });
@@ -202,6 +214,9 @@ class ListService {
 
         // Summary route
         this.app.get('/lists/:id/summary', this.getListSummary.bind(this));
+
+        // Checkout route (NEW)
+        this.app.post('/lists/:id/checkout', this.checkoutList.bind(this));
     }
 
     setupErrorHandling() {
@@ -223,7 +238,6 @@ class ListService {
         });
     }
 
-    // Auth middleware
     authMiddleware(req, res, next) {
         const authHeader = req.header('Authorization');
         
@@ -248,7 +262,6 @@ class ListService {
         }
     }
 
-    // Helper function to get item data from Item Service
     async getItemData(itemId) {
         try {
             const response = await axios.get(`${this.itemServiceUrl}/items/${itemId}`);
@@ -262,7 +275,6 @@ class ListService {
         }
     }
 
-    // Helper function to calculate list summary
     calculateSummary(items) {
         return {
             totalItems: items.length,
@@ -271,7 +283,6 @@ class ListService {
         };
     }
 
-    // Create new list
     async createList(req, res) {
         try {
             const { name, description } = req.body;
@@ -313,7 +324,6 @@ class ListService {
         }
     }
 
-    // Get user's lists
     async getLists(req, res) {
         try {
             const { page = 1, limit = 10, status } = req.query;
@@ -349,7 +359,6 @@ class ListService {
         }
     }
 
-    // Get specific list
     async getList(req, res) {
         try {
             const { id } = req.params;
@@ -362,7 +371,6 @@ class ListService {
                 });
             }
 
-            // Verificar se a lista pertence ao usuário
             if (list.userId !== req.user.id) {
                 return res.status(403).json({
                     success: false,
@@ -383,7 +391,6 @@ class ListService {
         }
     }
 
-    // Update list (name, description, status)
     async updateList(req, res) {
         try {
             const { id } = req.params;
@@ -436,7 +443,6 @@ class ListService {
         }
     }
 
-    // Delete list
     async deleteList(req, res) {
         try {
             const { id } = req.params;
@@ -471,7 +477,6 @@ class ListService {
         }
     }
 
-    // Add item to list
     async addItemToList(req, res) {
         try {
             const { id } = req.params;
@@ -499,7 +504,6 @@ class ListService {
                 });
             }
 
-            // Buscar dados do item no Item Service
             const itemData = await this.getItemData(itemId);
             if (!itemData) {
                 return res.status(404).json({
@@ -508,7 +512,6 @@ class ListService {
                 });
             }
 
-            // Verificar se item já existe na lista
             const existingItemIndex = list.items.findIndex(item => item.itemId === itemId);
             if (existingItemIndex !== -1) {
                 return res.status(409).json({
@@ -551,7 +554,6 @@ class ListService {
         }
     }
 
-    // Update item in list
     async updateListItem(req, res) {
         try {
             const { id, itemId } = req.params;
@@ -583,10 +585,8 @@ class ListService {
             const updatedItems = [...list.items];
             const item = updatedItems[itemIndex];
 
-            // Atualizar campos fornecidos
             if (quantity !== undefined) {
                 item.quantity = parseInt(quantity);
-                // Recalcular preço estimado baseado na quantidade
                 const itemData = await this.getItemData(itemId);
                 if (itemData) {
                     item.estimatedPrice = itemData.averagePrice * parseInt(quantity);
@@ -617,7 +617,6 @@ class ListService {
         }
     }
 
-    // Remove item from list
     async removeItemFromList(req, res) {
         try {
             const { id, itemId } = req.params;
@@ -668,7 +667,6 @@ class ListService {
         }
     }
 
-    // Get list summary
     async getListSummary(req, res) {
         try {
             const { id } = req.params;
@@ -688,13 +686,10 @@ class ListService {
                 });
             }
 
-            // Recalcular resumo em tempo real
             const summary = this.calculateSummary(list.items);
             
-            // Estatísticas adicionais
             const categoryStats = {};
             list.items.forEach(item => {
-                // Usar uma categoria padrão se não conseguir obter do item service
                 const category = 'Geral';
                 if (!categoryStats[category]) {
                     categoryStats[category] = { count: 0, total: 0, purchased: 0 };
@@ -725,17 +720,76 @@ class ListService {
         }
     }
 
-    // Register with service registry
+    // NEW: Checkout list and publish event to RabbitMQ
+    async checkoutList(req, res) {
+        try {
+            const { id } = req.params;
+            const list = await this.listsDb.findById(id);
+
+            if (!list) {
+                return res.status(404).json({
+                    success: false,
+                    message: 'Lista não encontrada'
+                });
+            }
+
+            if (list.userId !== req.user.id) {
+                return res.status(403).json({
+                    success: false,
+                    message: 'Acesso negado'
+                });
+            }
+
+            if (list.status === 'completed') {
+                return res.status(400).json({
+                    success: false,
+                    message: 'Lista já foi finalizada'
+                });
+            }
+
+            // Atualizar status da lista para completed
+            const updatedList = await this.listsDb.update(id, {
+                status: 'completed',
+                completedAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString()
+            });
+
+            // Publicar evento no RabbitMQ de forma assíncrona
+            // Não aguardar o resultado para retornar 202 imediatamente
+            this.rabbitPublisher.publishListCheckout(updatedList)
+                .catch(error => {
+                    console.error('Erro ao publicar evento de checkout:', error);
+                });
+
+            // Retornar 202 Accepted imediatamente
+            res.status(202).json({
+                success: true,
+                message: 'Checkout iniciado. A lista foi finalizada e o evento será processado.',
+                data: {
+                    listId: updatedList.id,
+                    status: updatedList.status,
+                    completedAt: updatedList.completedAt
+                }
+            });
+
+        } catch (error) {
+            console.error('Erro ao finalizar lista:', error);
+            res.status(500).json({
+                success: false,
+                message: 'Erro interno do servidor'
+            });
+        }
+    }
+
     registerWithRegistry() {
         serviceRegistry.register(this.serviceName, {
             url: this.serviceUrl,
             version: '1.0.0',
             database: 'JSON-NoSQL',
-            endpoints: ['/health', '/lists', '/lists/:id/items', '/lists/:id/summary']
+            endpoints: ['/health', '/lists', '/lists/:id/items', '/lists/:id/summary', '/lists/:id/checkout']
         });
     }
 
-    // Start health check reporting
     startHealthReporting() {
         setInterval(() => {
             serviceRegistry.updateHealth(this.serviceName, true);
@@ -750,9 +804,9 @@ class ListService {
             console.log(`Health: ${this.serviceUrl}/health`);
             console.log(`Database: JSON-NoSQL`);
             console.log(`Item Service: ${this.itemServiceUrl}`);
+            console.log(`RabbitMQ: ${this.rabbitPublisher.rabbitUrl}`);
             console.log('=====================================');
             
-            // Register with service registry
             this.registerWithRegistry();
             this.startHealthReporting();
         });
@@ -765,11 +819,13 @@ if (require.main === module) {
     listService.start();
 
     // Graceful shutdown
-    process.on('SIGTERM', () => {
+    process.on('SIGTERM', async () => {
+        await listService.rabbitPublisher.close();
         serviceRegistry.unregister('list-service');
         process.exit(0);
     });
-    process.on('SIGINT', () => {
+    process.on('SIGINT', async () => {
+        await listService.rabbitPublisher.close();
         serviceRegistry.unregister('list-service');
         process.exit(0);
     });

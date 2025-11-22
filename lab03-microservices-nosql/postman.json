@@ -1,0 +1,938 @@
+{
+  "info": {
+    "name": "Microservices - User, List & Item Service (via API Gateway)",
+    "_postman_id": "b2a3c8b0-0000-0000-0000-user-list-item-service",
+    "description": "Coleção de requisições para User Service, List Service e Item Service através do API Gateway (http://localhost:3000). Inclui auth, usuários, listas e catálogo de itens com NoSQL.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health - API Gateway",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/health",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "health"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Health - User Service (via Gateway)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/users/health",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "users",
+            "health"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Health - List Service (via Gateway)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/lists/health",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "lists",
+            "health"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Health - Item Service (via Gateway)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/items/health",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "items",
+            "health"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Registry & Dashboard (Gateway)",
+      "item": [
+        {
+          "name": "Service Registry (GET /registry)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/registry",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "registry"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Dashboard (GET /api/dashboard)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/dashboard",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "dashboard"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Global Search (GET /api/search?q=...)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/search?q={{search_query}}&limit=10",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "{{search_query}}"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register (POST /api/auth/register)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user1@microservices.com\",\n  \"username\": \"user1\",\n  \"password\": \"senha123\",\n  \"firstName\": \"User\",\n  \"lastName\": \"One\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/register",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Login (POST /api/auth/login)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifier\": \"user1@microservices.com\",\n  \"password\": \"senha123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Validate Token (POST /api/auth/validate)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"{{token}}\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/validate",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "validate"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users (Protected)",
+      "item": [
+        {
+          "name": "Get Users (GET /api/users?page=&limit=&role=&status=)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/users?page=1&limit=10",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "users"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get User by ID (GET /api/users/:id)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/users/{{user_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "{{user_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update User (PUT /api/users/:id)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"User\",\n  \"lastName\": \"One Updated\",\n  \"email\": \"user1-updated@microservices.com\",\n  \"bio\": \"Nova bio de teste\",\n  \"theme\": \"dark\",\n  \"language\": \"pt-BR\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/users/{{user_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "{{user_id}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Search Users (Protected)",
+      "item": [
+        {
+          "name": "Search Users (GET /api/search?q=...)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/search?q={{search_query}}&limit=5",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "{{search_query}}"
+                },
+                {
+                  "key": "limit",
+                  "value": "5"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Items (Public + Protected)",
+      "item": [
+        {
+          "name": "Get Items (GET /api/items)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/items?page=1&limit=20&active=true",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "items"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "active",
+                  "value": "true"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Items (filter by category & name)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/items?page=1&limit=10&category={{item_category}}&name={{item_name}}&active=true&sortBy=name&sortOrder=asc",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "items"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "category",
+                  "value": "{{item_category}}"
+                },
+                {
+                  "key": "name",
+                  "value": "{{item_name}}"
+                },
+                {
+                  "key": "active",
+                  "value": "true"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "name"
+                },
+                {
+                  "key": "sortOrder",
+                  "value": "asc"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Item by ID (GET /api/items/:id)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/items/{{item_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "items",
+                "{{item_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Categories (GET /api/items/categories)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/items/categories",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "items",
+                "categories"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Search Items (GET /api/items/search?q=...)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/items/search?q={{item_search_query}}&limit=20&category={{item_category}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "items",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "{{item_search_query}}"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "category",
+                  "value": "{{item_category}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Item (POST /api/items) [Protected]",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Produto Teste\",\n  \"category\": \"Alimentos\",\n  \"brand\": \"Marca Teste\",\n  \"unit\": \"un\",\n  \"averagePrice\": 9.99,\n  \"barcode\": \"9999999999999\",\n  \"description\": \"Item de teste criado via Postman\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/items",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "items"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Item (PUT /api/items/:id) [Protected]",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Produto Teste Atualizado\",\n  \"category\": \"Alimentos\",\n  \"brand\": \"Marca Teste 2\",\n  \"unit\": \"un\",\n  \"averagePrice\": 10.50,\n  \"barcode\": \"9999999999999\",\n  \"description\": \"Atualizado via Postman\",\n  \"active\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/items/{{item_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "items",
+                "{{item_id}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Lists (Protected)",
+      "item": [
+        {
+          "name": "Create List (POST /api/lists)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Lista de Compras - Semana\",\n  \"description\": \"Lista de compras para a semana\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/lists",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "lists"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Lists (GET /api/lists?page=&limit=&status=)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/lists?page=1&limit=10",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "lists"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get List by ID (GET /api/lists/:id)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/lists/{{list_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "lists",
+                "{{list_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update List (PUT /api/lists/:id)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Lista de Compras - Semana (Atualizada)\",\n  \"description\": \"Atualizada\",\n  \"status\": \"active\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/lists/{{list_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "lists",
+                "{{list_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete List (DELETE /api/lists/:id)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/lists/{{list_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "lists",
+                "{{list_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Add Item to List (POST /api/lists/:id/items)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itemId\": \"{{item_id}}\",\n  \"quantity\": 2,\n  \"notes\": \"Observação opcional\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/lists/{{list_id}}/items",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "lists",
+                "{{list_id}}",
+                "items"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update List Item (PUT /api/lists/:id/items/:itemId)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"quantity\": 3,\n  \"purchased\": true,\n  \"notes\": \"Atualizado pelo Postman\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/lists/{{list_id}}/items/{{list_item_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "lists",
+                "{{list_id}}",
+                "items",
+                "{{list_item_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Remove Item from List (DELETE /api/lists/:id/items/:itemId)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/lists/{{list_id}}/items/{{list_item_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "lists",
+                "{{list_id}}",
+                "items",
+                "{{list_item_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get List Summary (GET /api/lists/:id/summary)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/lists/{{list_id}}/summary",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "lists",
+                "{{list_id}}",
+                "summary"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Checkout List (POST /api/lists/:id/checkout)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/lists/{{list_id}}/checkout",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "lists",
+                "{{list_id}}",
+                "checkout"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "user_id",
+      "value": ""
+    },
+    {
+      "key": "search_query",
+      "value": "user"
+    },
+    {
+      "key": "list_id",
+      "value": ""
+    },
+    {
+      "key": "item_id",
+      "value": ""
+    },
+    {
+      "key": "list_item_id",
+      "value": ""
+    },
+    {
+      "key": "item_category",
+      "value": ""
+    },
+    {
+      "key": "item_name",
+      "value": ""
+    },
+    {
+      "key": "item_search_query",
+      "value": "arroz"
+    }
+  ]
+}

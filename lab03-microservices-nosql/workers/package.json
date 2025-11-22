@@ -1,0 +1,30 @@
+{
+  "name": "shopping-list-workers",
+  "version": "1.0.0",
+  "description": "Workers/Consumers para processar eventos do RabbitMQ",
+  "main": "notificationConsumer.js",
+  "scripts": {
+    "start": "concurrently \"npm run notification\" \"npm run analytics\"",
+    "notification": "node start-notification-consumer.js",
+    "analytics": "node start-analytics-consumer.js",
+    "dev": "concurrently \"nodemon start-notification-consumer.js\" \"nodemon start-analytics-consumer.js\"",
+    "dev:notification": "nodemon start-notification-consumer.js",
+    "dev:analytics": "nodemon start-analytics-consumer.js"
+  },
+  "keywords": [
+    "rabbitmq",
+    "consumer",
+    "worker",
+    "notification",
+    "microservices"
+  ],
+  "author": "Aluno PUC Minas",
+  "license": "MIT",
+  "dependencies": {
+    "amqplib": "^0.10.9",
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
