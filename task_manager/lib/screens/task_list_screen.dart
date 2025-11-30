@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:task_manager/services/camera_service.dart';
 import '../models/task.dart';
 import '../services/database_service.dart';
 import '../services/sensor_service.dart';
 import '../services/location_service.dart';
+import '../services/connectivity_service.dart';
 import '../screens/task_form_screen.dart';
 import '../widgets/task_card.dart';
 
@@ -18,18 +20,86 @@ class _TaskListScreenState extends State<TaskListScreen> {
   List<Task> _tasks = [];
   String _filter = 'all';
   bool _isLoading = true;
+  bool _isOnline = false;
+  String _connectionType = '';
 
   @override
   void initState() {
     super.initState();
+    _initializeServices();
     _loadTasks();
-    _setupShakeDetection(); // INICIAR SHAKE
+    _setupShakeDetection();
   }
 
   @override
   void dispose() {
-    SensorService.instance.stop(); // PARAR SHAKE
+    SensorService.instance.stop();
     super.dispose();
+  }
+
+  /// Inicializa serviços assíncronos
+  Future<void> _initializeServices() async {
+    // Inicializa ConnectivityService
+    await ConnectivityService.instance.initialize();
+    
+    // Atualiza status inicial
+    _updateConnectivityStatus();
+    
+    // Escuta mudanças de conectividade
+    ConnectivityService.instance.onConnectivityChanged.listen((isConnected) {
+      if (mounted) {
+        _updateConnectivityStatus();
+        _showConnectivitySnackbar(isConnected);
+      }
+    });
+  }
+
+  /// Atualiza status de conectividade na UI
+  void _updateConnectivityStatus() {
+    setState(() {
+      _isOnline = ConnectivityService.instance.isConnected;
+      _connectionType = _getConnectionTypeString(
+        ConnectivityService.instance.connectionType,
+      );
+    });
+  }
+
+  /// Retorna string do tipo de conexão
+  String _getConnectionTypeString(ConnectivityResult result) {
+    switch (result) {
+      case ConnectivityResult.wifi:
+        return 'WiFi';
+      case ConnectivityResult.mobile:
+        return 'Móvel';
+      case ConnectivityResult.ethernet:
+        return 'Ethernet';
+      default:
+        return '';
+    }
+  }
+
+  /// Mostra notificação de mudança de conectividade
+  void _showConnectivitySnackbar(bool isOnline) {
+    final icon = isOnline ? '🟢' : '🔴';
+    final message = isOnline
+        ? 'Conectado${_connectionType.isNotEmpty ? " via $_connectionType" : ""}'
+        : 'Modo Offline ativado';
+    final color = isOnline ? Colors.green : Colors.orange;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Row(
+          children: [
+            Text(icon, style: const TextStyle(fontSize: 18)),
+            const SizedBox(width: 8),
+            Expanded(child: Text(message)),
+          ],
+        ),
+        backgroundColor: color,
+        duration: const Duration(seconds: 2),
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
   }
 
   // SHAKE DETECTION
@@ -168,7 +238,6 @@ class _TaskListScreenState extends State<TaskListScreen> {
       case 'completed':
         return _tasks.where((t) => t.completed).toList();
       case 'nearby':
-        // Implementar filtro de proximidade
         return _tasks;
       default:
         return _tasks;
@@ -308,6 +377,9 @@ class _TaskListScreenState extends State<TaskListScreen> {
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
         actions: [
+          // INDICADOR DE CONECTIVIDADE
+          _buildConnectivityIndicator(),
+          
           PopupMenuButton<String>(
             icon: const Icon(Icons.filter_list),
             onSelected: (value) {
@@ -365,35 +437,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
           ),
           IconButton(
             icon: const Icon(Icons.info_outline),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) => AlertDialog(
-                  title: const Text('💡 Dicas'),
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text('• Toque no card para editar'),
-                      SizedBox(height: 8),
-                      Text('• Marque como completa com checkbox'),
-                      SizedBox(height: 8),
-                      Text('• Sacuda o celular para completar rápido!'),
-                      SizedBox(height: 8),
-                      Text('• Use filtros para organizar'),
-                      SizedBox(height: 8),
-                      Text('• Adicione fotos e localização'),
-                    ],
-                  ),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: const Text('Entendi'),
-                    ),
-                  ],
-                ),
-              );
-            },
+            onPressed: () => _showInfoDialog(),
           ),
         ],
       ),
@@ -499,6 +543,140 @@ class _TaskListScreenState extends State<TaskListScreen> {
     );
   }
 
+  /// Widget indicador de conectividade na AppBar
+  Widget _buildConnectivityIndicator() {
+    return GestureDetector(
+      onTap: () => _showConnectivityDialog(),
+      child: Container(
+        margin: const EdgeInsets.only(right: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        decoration: BoxDecoration(
+          color: _isOnline 
+              ? Colors.green.withOpacity(0.2)
+              : Colors.orange.withOpacity(0.2),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: _isOnline ? Colors.green : Colors.orange,
+            width: 1.5,
+          ),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              _isOnline ? Icons.cloud_done : Icons.cloud_off,
+              size: 16,
+              color: _isOnline ? Colors.green : Colors.orange,
+            ),
+            const SizedBox(width: 6),
+            Text(
+              _isOnline ? 'Online' : 'Offline',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Dialog com informações detalhadas de conectividade
+  void _showConnectivityDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Row(
+          children: [
+            Icon(
+              _isOnline ? Icons.wifi : Icons.wifi_off,
+              color: _isOnline ? Colors.green : Colors.orange,
+            ),
+            const SizedBox(width: 8),
+            const Text('Status de Conexão'),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _InfoRow(
+              label: 'Estado:',
+              value: _isOnline ? 'Online' : 'Offline',
+              valueColor: _isOnline ? Colors.green : Colors.orange,
+            ),
+            if (_isOnline && _connectionType.isNotEmpty)
+              _InfoRow(
+                label: 'Tipo:',
+                value: _connectionType,
+              ),
+            const SizedBox(height: 16),
+            const Divider(),
+            const SizedBox(height: 8),
+            Text(
+              _isOnline
+                  ? '✅ Você está conectado à internet. Todas as funcionalidades estão disponíveis.'
+                  : '⚠️ Modo offline ativado. As tarefas serão salvas localmente e sincronizadas quando a conexão for restabelecida.',
+              style: TextStyle(
+                fontSize: 13,
+                color: Colors.grey[700],
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton.icon(
+            onPressed: () async {
+              Navigator.pop(context);
+              await ConnectivityService.instance.refresh();
+              _updateConnectivityStatus();
+            },
+            icon: const Icon(Icons.refresh),
+            label: const Text('Atualizar'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Fechar'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showInfoDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('💡 Dicas'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const [
+            Text('• Toque no card para editar'),
+            SizedBox(height: 8),
+            Text('• Marque como completa com checkbox'),
+            SizedBox(height: 8),
+            Text('• Sacuda o celular para completar rápido!'),
+            SizedBox(height: 8),
+            Text('• Use filtros para organizar'),
+            SizedBox(height: 8),
+            Text('• Adicione fotos e localização'),
+            SizedBox(height: 8),
+            Text('• Modo offline salva tudo localmente'),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Entendi'),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildEmptyState() {
     String message;
     IconData icon;
@@ -574,6 +752,45 @@ class _StatItem extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _InfoRow extends StatelessWidget {
+  final String label;
+  final String value;
+  final Color? valueColor;
+
+  const _InfoRow({
+    required this.label,
+    required this.value,
+    this.valueColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        children: [
+          Text(
+            label,
+            style: const TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 14,
+            ),
+          ),
+          const SizedBox(width: 8),
+          Text(
+            value,
+            style: TextStyle(
+              fontSize: 14,
+              color: valueColor ?? Colors.black87,
+              fontWeight: valueColor != null ? FontWeight.w600 : FontWeight.normal,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
