@@ -170,5 +170,85 @@
     "createdAt": "2025-11-22T19:23:04.863Z",
     "updatedAt": "2025-11-22T19:23:16.523Z",
     "completedAt": "2025-11-22T19:23:16.522Z"
+  },
+  {
+    "id": "9a6c9c95-97d9-4f7c-a9c5-432bd25930a9",
+    "userId": "7d21cdb1-8ef0-48e6-bd1d-bce35dcef19f",
+    "name": "Lista de Compras - Video",
+    "description": "Lista de compras para o video",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "9d14606e-5bd0-482e-917d-514c62702ae9",
+        "itemName": "Produto Teste2",
+        "quantity": 2,
+        "unit": "un",
+        "estimatedPrice": 20,
+        "purchased": false,
+        "notes": "Observação opcional",
+        "addedAt": "2025-12-01T20:42:09.958Z"
+      }
+    ],
+    "summary": {
+      "totalItems": 1,
+      "purchasedItems": 0,
+      "estimatedTotal": 20
+    },
+    "createdAt": "2025-12-01T20:32:43.953Z",
+    "updatedAt": "2025-12-01T20:42:09.966Z",
+    "completedAt": "2025-12-01T20:33:24.703Z"
+  },
+  {
+    "id": "7710c693-63f2-402e-ac49-4802a08c93c9",
+    "userId": "7d21cdb1-8ef0-48e6-bd1d-bce35dcef19f",
+    "name": "Lista de Compras - Video com valor",
+    "description": "Lista de compras para o video valor",
+    "status": "completed",
+    "items": [],
+    "summary": {
+      "totalItems": 0,
+      "purchasedItems": 0,
+      "estimatedTotal": 0
+    },
+    "createdAt": "2025-12-01T20:36:23.947Z",
+    "updatedAt": "2025-12-01T20:43:37.509Z",
+    "completedAt": "2025-12-01T20:43:37.491Z"
+  },
+  {
+    "id": "184c8005-2427-49b4-b462-c44bf5d56ba1",
+    "userId": "7d21cdb1-8ef0-48e6-bd1d-bce35dcef19f",
+    "name": "Lista de Compras - Video com valor 2",
+    "description": "Lista de compras para o video valor",
+    "status": "completed",
+    "items": [
+      {
+        "itemId": "99c53b46-a9d3-434b-be01-fb8c8b656721",
+        "itemName": "Feijão Carioca",
+        "quantity": 2,
+        "unit": "kg",
+        "estimatedPrice": 17.8,
+        "purchased": false,
+        "notes": "Observação opcional",
+        "addedAt": "2025-12-01T20:46:39.008Z"
+      },
+      {
+        "itemId": "203f1308-078c-4466-b9b0-216bf6457727",
+        "itemName": "Item Demo NoSQL",
+        "quantity": 1,
+        "unit": "un",
+        "estimatedPrice": 15.99,
+        "purchased": false,
+        "notes": "Observação opcional",
+        "addedAt": "2025-12-01T20:47:02.480Z"
+      }
+    ],
+    "summary": {
+      "totalItems": 2,
+      "purchasedItems": 0,
+      "estimatedTotal": 33.79
+    },
+    "createdAt": "2025-12-01T20:45:44.459Z",
+    "updatedAt": "2025-12-01T20:48:11.884Z",
+    "completedAt": "2025-12-01T20:48:11.884Z"
   }
 ]

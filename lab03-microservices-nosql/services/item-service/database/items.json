@@ -285,5 +285,47 @@
     "createdAt": "2025-09-22T02:09:06.389Z",
     "createdBy": "ee64a786-d91f-4fb8-a81d-3be42d32c1af",
     "updatedAt": "2025-09-22T02:09:06.391Z"
+  },
+  {
+    "id": "d4f4ceea-f7be-483a-8f7f-8255d3cbc30c",
+    "name": "Produto Teste",
+    "category": "Alimentos",
+    "brand": "Marca Teste",
+    "unit": "un",
+    "averagePrice": 9.99,
+    "barcode": "9999999999999",
+    "description": "Item de teste criado via Postman",
+    "active": true,
+    "createdAt": "2025-12-01T20:37:16.167Z",
+    "createdBy": "7d21cdb1-8ef0-48e6-bd1d-bce35dcef19f",
+    "updatedAt": "2025-12-01T20:37:16.168Z"
+  },
+  {
+    "id": "9d14606e-5bd0-482e-917d-514c62702ae9",
+    "name": "Produto Teste2",
+    "category": "Alimentos",
+    "brand": "Marca Teste",
+    "unit": "un",
+    "averagePrice": 10,
+    "barcode": "9999999999998",
+    "description": "Item de teste criado via Postman",
+    "active": true,
+    "createdAt": "2025-12-01T20:39:18.549Z",
+    "createdBy": "7d21cdb1-8ef0-48e6-bd1d-bce35dcef19f",
+    "updatedAt": "2025-12-01T20:39:18.607Z"
+  },
+  {
+    "id": "17a61e61-4bca-4bd7-9366-89a298851f62",
+    "name": "Produto Teste3",
+    "category": "Alimentos",
+    "brand": "Marca Teste",
+    "unit": "un",
+    "averagePrice": 15,
+    "barcode": "9999999999997",
+    "description": "Item de teste criado via Postman",
+    "active": true,
+    "createdAt": "2025-12-01T20:44:51.330Z",
+    "createdBy": "7d21cdb1-8ef0-48e6-bd1d-bce35dcef19f",
+    "updatedAt": "2025-12-01T20:44:51.331Z"
   }
 ]

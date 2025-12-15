@@ -1,15 +1,31 @@
 {
-  "totalCheckouts": 1,
-  "totalSpent": 0,
-  "totalItems": 0,
+  "totalCheckouts": 4,
+  "totalSpent": 33.79,
+  "totalItems": 2,
   "totalItemsPurchased": 0,
   "checkoutsByUser": {
     "4f5249a7-5442-4852-b7e0-0cacc0f1b1dc": {
       "checkouts": 1,
       "totalSpent": 0,
       "totalItems": 0
+    },
+    "7d21cdb1-8ef0-48e6-bd1d-bce35dcef19f": {
+      "checkouts": 3,
+      "totalSpent": 33.79,
+      "totalItems": 2
     }
   },
-  "itemsFrequency": {},
-  "lastUpdate": "2025-11-22T19:23:16.554Z"
+  "itemsFrequency": {
+    "Feijão Carioca": {
+      "count": 1,
+      "totalQuantity": 2,
+      "totalSpent": 17.8
+    },
+    "Item Demo NoSQL": {
+      "count": 1,
+      "totalQuantity": 1,
+      "totalSpent": 15.99
+    }
+  },
+  "lastUpdate": "2025-12-01T20:48:12.066Z"
 }
